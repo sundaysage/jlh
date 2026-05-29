@@ -133,7 +133,7 @@ export default function IndustrialPlant() {
         >
           <h2 className="text-3xl font-bold mb-4">Lifecycle Commitment</h2>
           <p className="mb-4">
-            Our approach extends beyond construction — we remain partners with clients throughout the full lifecycle of their industrial facilities. With predictive maintenance, digital monitoring, and on-demand support, we maximize uptime and minimize operational risks.
+            Our approach extends beyond constructions — we remain partners with clients throughout the full lifecycle of their industrial facilities. With predictive maintenance, digital monitoring, and on-demand support, we maximize uptime and minimize operational risks.
           </p>
           <p>
             By integratings sustainability practices, we also ensure that every plant we deliver contributes to a cleaner, safer, and more energy-efficient future.
