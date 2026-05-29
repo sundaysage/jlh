@@ -26,7 +26,7 @@ export default function About() {
           <h1 className="text-4xl md:text-6xl font-bold text-white">About Us</h1>
           <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto text-white">
             Discover the story, vision, and leadership of{" "}
-            <span className="font-semibold">Mr. Justin Lee huang</span> — CEO
+            <span className="font-semibold">Mr. James Lee Huang</span> — CEO
             of ML Global Energy Limited.
           </p>
         </motion.div>
@@ -58,7 +58,7 @@ export default function About() {
         >
           <h2 className="text-2xl md:text-4xl font-bold">Early Life & Education</h2>
           <p>
-            Mr. Justin Lee huang was born in the vibrant city of Norwich,
+            Mr. James Lee Huang was born in the vibrant city of Norwich,
             Norfolk, United Kingdom, into a richly multicultural family. His
             mother, originally from Miri Sarawak Malaysia and his father, a
             British Korean, instilled in him a deep appreciation for diverse
@@ -68,7 +68,7 @@ export default function About() {
             This unique blend of Eastern and Western influences shaped his
             worldview, nurtured a respect for different perspectives, and laid
             the foundation for the global mindset he carries into his work
-            today. From an early age, Justin demonstrated a natural curiosity
+            today. From an early age, james demonstrated a natural curiosity
             for how things work and an exceptional aptitude for science and
             engineering.
           </p>
@@ -80,7 +80,7 @@ export default function About() {
             lifelong passion for innovation in the energy sector.
           </p>
           <p>
-            At the age of 18, Justin was accepted into the prestigious Imperial
+            At the age of 18, james was accepted into the prestigious Imperial
             College London, one of the world’s leading universities for science
             and engineering. His academic journey focused on Petrochemical
             Engineering, a field that perfectly aligned with his interests in
@@ -88,7 +88,7 @@ export default function About() {
           </p>
           <p>
             Driven by a desire to contribute to the advancement of energy
-            technology, Justin pursued postgraduate studies, culminating in an
+            technology, james pursued postgraduate studies, culminating in an
             Engineering Doctorate (EngD) in Petrochemical Engineering. His
             doctoral research focused on advanced pipeline systems, crude oil
             extraction methods, and next-generation energy infrastructure —
@@ -96,7 +96,7 @@ export default function About() {
             career.
           </p>
           <p>
-            Further cementing his professional standing, Justin earned the
+            Further cementing his professional standing, james earned the
             prestigious title Bachelor of Engineering (BEng) in the United
             Kingdom — an honor that signifies both exceptional technical
             expertise and adherence to the highest ethical and professional
@@ -104,7 +104,7 @@ export default function About() {
           </p>
           <p>
             With his academic and professional credentials firmly established,
-            Justin founded ML Global Energy Limited, building on a vision
+            james founded ML Global Energy Limited, building on a vision
             inspired in part by his late father’s entrepreneurial legacy. Under
             his leadership, the company has expanded its scope to include
             pipeline installation, crude oil drilling, gas exploration, nuclear
@@ -112,7 +112,7 @@ export default function About() {
             depot operations.
           </p>
           <p>
-            Justin's leadership is defined by his commitment to innovation,
+            jame's leadership is defined by his commitment to innovation,
             sustainability, and global collaboration — values deeply rooted in
             both his upbringing and professional journey.
           </p>
@@ -130,7 +130,7 @@ export default function About() {
         >
           <h2 className="text-2xl md:text-4xl font-bold">Career & Achievements</h2>
           <p>
-            Justin Lee huang has carved an extraordinary path in the global
+           James Lee Huang has carved an extraordinary path in the global
             energy sector, making history as one of the youngest CEOs to lead a
             major integrated oil, gas, and renewable energy company in the
             United Kingdom.
@@ -149,32 +149,32 @@ export default function About() {
             rigs, and global fuel depot networks.
           </p>
           <p>
-            Justin strategic vision has positioned the company as a trusted
+            james strategic vision has positioned the company as a trusted
             partner for governments, multinational corporations, and pioneering
             green energy initiatives.
           </p>
           <p className="font-semibold">Awards & Recognitions</p>
           <ul className="list-disc list-inside space-y-2">
             <li>
-              <strong>Global Energy Leadership Award – Energy Council, 2018</strong>: Recognizing executives who have demonstrated exceptional vision,
+              <strong>Global Energy Leadership Award – Energy Council, </strong>: Recognizing executives who have demonstrated exceptional vision,
               innovation, and influence in shaping the future of the global
               energy landscape.
             </li>
             <li>
               <strong>Petrochemical Industry Excellence Award – World Petroleum
-              Council, 2020</strong>: Awarded for achievements in petrochemical engineering,
+              Council, </strong>: Awarded for achievements in petrochemical engineering,
               particularly in high-efficiency pipeline design and advanced
               offshore rig safety systems.
             </li>
             <li>
               <strong>Energy Transition Pioneer Medal – International Renewable
-              & Clean Energy Forum, 2022</strong>: Honoring leadership in bridging the gap between fossil fuels and
+              & Clean Energy Forum, </strong>: Honoring leadership in bridging the gap between fossil fuels and
               clean energy, guiding ML Global into wind, solar, and nuclear
               hybrid projects.
             </li>
             <li>
               <strong>Chartered Engineer of the Year – Engineering Council UK,
-              2023</strong>: A rare recognition for Chartered Engineers who made large-scale
+              </strong>: A rare recognition for Chartered Engineers who made large-scale
               contributions through innovation, mentoring, and industry
               leadership.
             </li>
@@ -190,7 +190,7 @@ export default function About() {
         >
           <Image
             src="/owner2.jpeg"
-            alt=" Lee  - Career & Achievements"
+            alt=" jame  - Career & Achievements"
             fill
             className="object-cover object-center"
           />
@@ -223,7 +223,7 @@ export default function About() {
         >
           <h2 className="text-2xl md:text-4xl font-bold">Vision & Leadership</h2>
           <p>
-            Justin Lee huang leadership philosophy is grounded in innovation,
+           James Lee Huang leadership philosophy is grounded in innovation,
             integrity, and global collaboration. Drawing on a career that spans
             the full spectrum of the energy industry — from crude oil
             exploration to nuclear and renewable energy infrastructure — he
@@ -237,7 +237,7 @@ export default function About() {
             to responsibly meet the world’s growing energy demands.
           </p>
           <p>
-            Justin leads with a hands-on, solutions-driven style, personally
+           james leads with a hands-on, solutions-driven style, personally
             overseeing major infrastructure projects and ensuring they meet the
             highest standards of safety, efficiency, and environmental
             compliance. His ability to unite engineers, investors, policymakers,
@@ -247,7 +247,7 @@ export default function About() {
           </p>
           <p>
             As a Chartered Engineer and international award-winning executive,
-            Justin influence extends beyond corporate boardrooms. He actively
+            james influence extends beyond corporate boardrooms. He actively
             mentors young professionals, advocates for greater inclusion in the
             engineering sector, and champions cross-border cooperation to tackle
             the pressing issues of energy security, climate change, and
@@ -257,7 +257,7 @@ export default function About() {
             “The world’s energy future is not a choice between fossil fuels or
             renewables — it’s about engineering a balanced, innovative, and
             sustainable path forward. That’s the mission I’ve committed my
-            life’s work to achieving.” — Justin Lee huang
+            life’s work to achieving.” — James Lee Huang
           </p>
         </motion.div>
       </section>
