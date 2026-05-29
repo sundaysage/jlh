@@ -1,8 +1,13 @@
+import { serverSideTranslations } from "next-i18next/pages/serverSideTranslations";
+
+
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 // ── Animation Variants ────────────────────────────────────────
 const fadeUp = {
@@ -24,10 +29,9 @@ const stagger = {
 
 // ── Data ──────────────────────────────────────────────────────
 const STATS = [
-  { value: "35+",  label: "Years of Excellence",   sub: "Founded 1989"              },
-  { value: "40+",  label: "Countries Served",       sub: "Global footprint"          },
-  { value: "$18B", label: "Project Value Managed",  sub: "Across all divisions"      },
-  { value: "1,000+", label: "Global Employees",     sub: "Expert teams worldwide"    },
+  { value: "20+",  label: "Years of Excellence",                },
+  { value: "15+",  label: "Countries Served",       sub: "Global footprint"          },
+  { value: "10000+", label: "Global Employees",     sub: "Expert teams worldwide"    },
 ];
 
 const SERVICES = [
@@ -35,37 +39,37 @@ const SERVICES = [
     icon: "🛢️",
     title: "Oil & Gas E&P",
     desc:  "Onshore and offshore exploration and production across four continents — from seismic survey to first barrel.",
-    href:  "/services/oil-gas",
+    href:  "/oil",
   },
   {
     icon: "🌿",
     title: "Renewable & Hybrid Energy",
     desc:  "Solar farms, wind energy, and hybrid systems engineered for the global transition to clean power.",
-    href:  "/services/renewable-hybrid-energy",
+    href:  "/renewable",
   },
   {
     icon: "🏗️",
     title: "Rig Construction & Offshore",
     desc:  "Heavy fabrication, equipment integration, and full lifecycle management of offshore and onshore rigs.",
-    href:  "/services/rig-construction",
+    href:  "/rig",
   },
   {
     icon: "🏭",
     title: "Industrial Plant Development",
     desc:  "Full EPC solutions for refineries, LNG plants, and petrochemical facilities — built for maximum uptime.",
-    href:  "/services/industrial-plant",
+    href:  "/mainten",
   },
   {
     icon: "🔩",
     title: "Pipeline Engineering",
     desc:  "15,000+ km of pipeline designed, constructed, and maintained across the world's most challenging terrains.",
-    href:  "/services/pipeline",
+    href:  "/pipeline",
   },
   {
     icon: "📋",
     title: "Project Management",
     desc:  "End-to-end consultancy and project leadership for complex energy ventures — on time, on budget.",
-    href:  "/services/project-management",
+    href:  "/projects",
   },
 ];
 
@@ -157,6 +161,7 @@ function SectionLabel({ children, color = "#E4AF2B" }) {
 export default function Home() {
   const [formData, setFormData] = useState({ name:"", email:"", message:"" });
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useTranslation("common");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -166,7 +171,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>JLH Global Energy Ltd — Integrated Energy Solutions</title>
+
+        <title>{t(" JLH Global Energy Ltd — Integrated Energy Solutions")}</title>
         <meta name="description" content="JLH Global Energy delivers integrated energy services — from upstream exploration to renewable transition — across four continents." />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -488,8 +494,7 @@ export default function Home() {
               <SectionLabel>About JLH Global Energy</SectionLabel>
               <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"clamp(2rem,4vw,3rem)", fontWeight:600, lineHeight:1.1, color:"#fff", marginBottom:"1.5rem" }}>
                 More Than an<br />
-                <span style={{ color:"#EFC75A", fontStyle:"italic" }}>Energy Company</span>
-              </h2>
+                <span style={{ color:"#EFC75A", fontStyle:"italic" }}>{t("Energy Company")}</span></h2>
               <p style={{ color:"#94A3B8", lineHeight:1.8, marginBottom:"1.25rem" }}>
                 At JLH Global Energy, we are a driving force behind the infrastructure that fuels nations, empowers industries, and supports communities across the globe. From upstream exploration to clean energy transition, we operate with precision, integrity, and a long-term view.
               </p>
@@ -585,85 +590,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ══════════════════════════════════════════════════════
-            NEWS
-        ══════════════════════════════════════════════════════ */}
-        <section id="media" style={{ padding:"6rem 1.5rem" }}>
-          <div style={{ maxWidth:"1200px", margin:"0 auto" }}>
-
-            <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once:true }}
-              style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", gap:"2rem", marginBottom:"3.5rem", flexWrap:"wrap" }}
-            >
-              <div>
-                <SectionLabel>Media & Press</SectionLabel>
-                <h2 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"clamp(2rem,4vw,3rem)", fontWeight:600, color:"#fff", lineHeight:1.1 }}>
-                  Latest News &amp;<br />
-                  <span style={{ color:"#EFC75A", fontStyle:"italic" }}>Press Releases</span>
-                </h2>
-              </div>
-              <Link href="/media"
-                style={{
-                  display:"inline-flex", alignItems:"center", gap:"6px",
-                  padding:"10px 24px", fontSize:"0.72rem", letterSpacing:"0.12em",
-                  textTransform:"uppercase", fontWeight:500, textDecoration:"none",
-                  border:"1px solid rgba(228,175,43,0.3)", color:"#EFC75A", background:"transparent",
-                  flexShrink:0
-                }}
-              >
-                View All
-                <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }}
-              style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"1px", background:"rgba(228,175,43,0.07)" }}
-            >
-              {NEWS.map((n, i) => (
-                <motion.div key={i} variants={fadeUp}>
-                  <Link href={n.href} style={{ textDecoration:"none", display:"block", height:"100%" }}>
-                    <div
-                      style={{
-                        padding:"2.5rem", background:"#060F20", height:"100%",
-                        position:"relative", overflow:"hidden", transition:"background 0.3s", cursor:"pointer"
-                      }}
-                      onMouseEnter={e => e.currentTarget.style.background="#0A1628"}
-                      onMouseLeave={e => e.currentTarget.style.background="#060F20"}
-                    >
-                      <div style={{ position:"absolute", top:0, left:0, right:0, height:"2px", background:"linear-gradient(90deg,#E4AF2B,transparent)" }} />
-
-                      {/* Tag + date */}
-                      <div style={{ display:"flex", alignItems:"center", gap:"10px", marginBottom:"1.25rem" }}>
-                        <span style={{
-                          padding:"3px 10px", fontSize:"0.65rem", letterSpacing:"0.1em",
-                          textTransform:"uppercase", color:"#E4AF2B",
-                          border:"1px solid rgba(228,175,43,0.25)", background:"rgba(228,175,43,0.06)"
-                        }}>{n.tag}</span>
-                        <time style={{ fontSize:"0.72rem", color:"#475569", letterSpacing:"0.05em" }}>{n.date}</time>
-                      </div>
-
-                      <h3 style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"1.35rem", fontWeight:600, color:"#fff", marginBottom:"0.75rem", lineHeight:1.2 }}>
-                        {n.title}
-                      </h3>
-                      <p style={{ color:"#64748B", fontSize:"0.88rem", lineHeight:1.7, marginBottom:"1.5rem" }}>
-                        {n.excerpt}
-                      </p>
-                      <div style={{ display:"inline-flex", alignItems:"center", gap:"6px", fontSize:"0.75rem", letterSpacing:"0.1em", textTransform:"uppercase", color:"#E4AF2B" }}>
-                        Read More
-                        <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
             </motion.div>
           </div>
         </section>
@@ -889,8 +815,8 @@ export default function Home() {
 
                 <hr style={{ border:"none", height:"1px", background:"linear-gradient(90deg,transparent,rgba(228,175,43,0.2),transparent)", margin:"1.5rem 0" }} />
 
-                <div style={{ fontSize:"0.78rem", color:"#475569", lineHeight:1.6 }}>
-                  Registered in England & Wales.<br />
+                <div style={{ fontSize:"0.78rem", color:"#475569", lineHeight:1.6 }}>{t("Registered in England & Wales.")}
+                  <br />
                   Company No. 01234567<br /><br />
                   <span style={{ color:"#334155" }}>JLH Global Energy Ltd operates in compliance with international energy regulations and standards across all jurisdictions.</span>
                 </div>
@@ -911,4 +837,11 @@ export default function Home() {
       `}</style>
     </>
   );
+}
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
 }

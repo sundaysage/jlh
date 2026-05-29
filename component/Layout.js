@@ -3,13 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 import JLHLogo from "./UI/JLHLogo.";
 const SERVICES = [
-  { label: "Oil & Gas E&P",            href: "/services/oil-gas"               },
-  { label: "Renewable & Hybrid Energy", href: "/services/renewable-hybrid-energy" },
-  { label: "Rig Construction",          href: "/services/rig-construction"       },
-  { label: "Industrial Plant",          href: "/services/industrial-plant"       },
-  { label: "Pipeline Engineering",      href: "/services/pipeline"               },
-  { label: "Project Management",        href: "/services/project-management"     },
-  { label: "Fuel Depot & Storage",      href: "/services/fuel-depot"             },
+  { label: "Oil & Gas E&P",            href: "oil"               },
+  { label: "Renewable & Hybrid Energy", href: "renewable" },
+  { label: "Rig Construction",          href: "rig"       },
+  { label: "Industrial Plant",          href: "mainten"       },
+  { label: "Pipeline Engineering",      href: "pipeline"               },
+  { label: "Project Management",        href: "projects"     },
+  { label: "Fuel Depot & Storage",      href: "fueldepot"             },
 ];
 
 const COMPANY = [
@@ -18,7 +18,6 @@ const COMPANY = [
   { label: "ESG",          href: "/#esg"        },
   { label: "Investors",    href: "/#investors"  },
   { label: "Careers",      href: "/#careers"    },
-  { label: "News & Media", href: "/#media"      },
 ];
 
 const LEGAL = [
@@ -241,7 +240,7 @@ export default function Layout({ children }) {
           {/* Copyright */}
           <div style={{ fontSize:"0.78rem", color:"#334155" }}>
             © {new Date().getFullYear()} JLH Global Energy Ltd. All rights reserved.
-            <span style={{ marginLeft:"1rem", color:"#1E293B" }}>Registered in England & Wales · Co. No. 01234567</span>
+            <span style={{ marginLeft:"1rem", color:"#1E293B" }}>Registered in London Company No: 2778741</span>
           </div>
 
           {/* Legal links */}
