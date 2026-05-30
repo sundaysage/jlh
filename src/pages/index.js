@@ -641,7 +641,7 @@ export default function Home() {
 
             <motion.div variants={fadeRight} initial="hidden" whileInView="show" viewport={{ once:true }}>
               <div style={{ position:"relative", width:"100%", paddingBottom:"65%", overflow:"hidden" }}>
-                <Image src="/tradechart.jpg" alt="Financial charts" fill className="object-cover" />
+                <Image src="/greenup.jpeg" alt="Financial charts" fill className="object-cover" />
                 <div style={{ position:"absolute", bottom:0, right:0, width:"72px", height:"72px", borderBottom:"2px solid #E4AF2B", borderRight:"2px solid #E4AF2B" }} />
                 <div style={{
                   position:"absolute", bottom:"1.5rem", left:"1.5rem",
