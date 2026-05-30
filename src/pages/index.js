@@ -483,7 +483,7 @@ export default function Home() {
                   padding:"12px 18px", background:"rgba(3,11,24,0.92)",
                   border:"1px solid rgba(228,175,43,0.25)", backdropFilter:"blur(8px)"
                 }}>
-                  <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"2rem", fontWeight:600, color:"#EFC75A", lineHeight:1 }}>35+</div>
+                  <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"2rem", fontWeight:600, color:"#EFC75A", lineHeight:1 }}>20+</div>
                   <div style={{ fontSize:"0.65rem", letterSpacing:"0.1em", textTransform:"uppercase", color:"#64748B", marginTop:"2px" }}>Years of Trust</div>
                 </div>
               </div>
