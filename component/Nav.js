@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import JLHLogo from "./UI/JLHLogo."; // Fixed trailing dot typo
+import JLHLogo from "./UI/JLHLogo.";
 
 // ── Supported languages ───────────────────────────────────────
 const LOCALES = [
@@ -56,8 +56,9 @@ export default function Nav() {
   const [langOpen,       setLangOpen]       = useState(false);
   const [locale,         setLocale]         = useState("en");
 
-  const dropdownRef = useRef(null);
-  const langRef     = useRef(null);
+  const dropdownRef   = useRef(null);
+  const langRef       = useRef(null);
+  const mobileLangRef = useRef(null); // FIX 1: Added reference tracker for mobile picker container
 
   // ── ⚡ GOOGLE TRANSLATE BACKEND INTEGRATION ENGINE ⚡ ──
   useEffect(() => {
@@ -103,7 +104,7 @@ export default function Nav() {
     }
   }, []);
 
-  // FIX: Force menus closed whenever user changes pages completely
+  // Force menus closed whenever user changes pages completely
   useEffect(() => {
     setMobileOpen(false);
     setMobileExpanded(null);
@@ -123,7 +124,12 @@ export default function Nav() {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setOpenDropdown(null);
       }
-      if (langRef.current && !langRef.current.contains(e.target)) {
+      
+      // FIX 2: Check both desktop and mobile layouts before closing the language tray
+      const clickedDesktopLang = langRef.current && langRef.current.contains(e.target);
+      const clickedMobileLang  = mobileLangRef.current && mobileLangRef.current.contains(e.target);
+      
+      if (!clickedDesktopLang && !clickedMobileLang) {
         setLangOpen(false);
       }
     };
@@ -131,7 +137,7 @@ export default function Nav() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Close mobile menu on desktop resize resize
+  // Close mobile menu on desktop resize
   useEffect(() => {
     const handler = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
     window.addEventListener("resize", handler);
@@ -141,7 +147,12 @@ export default function Nav() {
   const switchLocale = (code) => {
     setLocale(code);
     localStorage.setItem("jlh_locale", code);
-    setLangOpen(false);
+    
+    // FIX 3: Added a 150ms timeout to allow touch events to finish propagation on mobile viewports
+    setTimeout(() => {
+      setLangOpen(false);
+    }, 150);
+    
     runGoogleTranslation(code);
     window.dispatchEvent(new CustomEvent("jlh-locale-change", { detail: code }));
   };
@@ -322,7 +333,7 @@ export default function Nav() {
                 </div>
               ))}
 
-              {/* Language Picker Switcher */}
+              {/* Language Picker Switcher (Desktop) */}
               <div ref={langRef} style={{ position: "relative", marginLeft: "0.5rem" }}>
                 <button
                   onClick={() => setLangOpen(s => !s)}
@@ -421,7 +432,8 @@ export default function Nav() {
 
             {/* Mobile Actions Layer */}
             <div className="flex md:hidden items-center gap-3">
-              <div style={{ position: "relative" }}>
+              {/* FIX 4: Attached the new ref here to block sudden layout closures */}
+              <div ref={mobileLangRef} style={{ position: "relative" }}>
                 <button
                   onClick={() => setLangOpen(s => !s)}
                   style={{
