@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+/* Hide Google Translate top iframe banner and structural widgets */
+.skiptranslate iframe,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+body {
+  top: 0px !important;
+}
+/* Completely hide the default google combo container */
+#google_translate_element {
+  display: none !important;
+}

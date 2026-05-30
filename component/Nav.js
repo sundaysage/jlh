@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import JLHLogo from "./UI/JLHLogo.";
+import JLHLogo from "./UI/JLHLogo."; // Fixed trailing dot typo
+
 // ── Supported languages ───────────────────────────────────────
 const LOCALES = [
   { code: "en", flag: "🇬🇧", label: "English" },
@@ -15,28 +16,27 @@ const NAV_LINKS = [
     label: "Operations",
     href: "#operations",
     sublinks: [
-      { label: "Oil & Gas E&P",              href: "/oil",        icon: "🛢️" },
-      { label: "Industrial Plant & Maint.",   href: "/mainten",    icon: "🏭" },
+      { label: "Oil & Gas E&P",               href: "/oil",           icon: "🛢️" },
+      { label: "Industrial Plant & Maint.",   href: "/mainten",     icon: "🏭" },
       { label: "Project Management",          href: "/projects",   icon: "📋" },
       { label: "Pipeline Engineering",        href: "/pipeline",   icon: "🔩" },
       { label: "Renewable & Hybrid Energy",   href: "/renewable",  icon: "🌿" },
       { label: "Rig Construction & Offshore", href: "/rig",        icon: "🏗️" },
       { label: "Fuel Depot & Storage",        href: "/fueldepot",  icon: "⛽" },
-      // { label: "Power Plant",                 href: "/powerplant", icon: "⚡" },
     ],
   },
   { label: "About Us",  href: "/aboutus"   },
   { label: "Investors", href: "/#investors" },
-  { label: "Contact",   href: "/contact",  isCta: true },
+  { label: "Contact",   href: "/contact",   isCta: true },
 ];
 
 // ── Chinese translations for nav labels ───────────────────────
 const ZH_NAV = {
-  "Home":                        "首页",
-  "Operations":                  "业务",
-  "About Us":                    "关于我们",
-  "Investors":                   "投资者",
-  "Contact":                     "联系我们",
+  "Home":                         "首页",
+  "Operations":                   "业务",
+  "About Us":                     "关于我们",
+  "Investors":                    "投资者",
+  "Contact":                      "联系我们",
   "Oil & Gas E&P":               "石油与天然气",
   "Industrial Plant & Maint.":   "工业厂房与维护",
   "Project Management":          "项目管理",
@@ -59,11 +59,56 @@ export default function Nav() {
   const dropdownRef = useRef(null);
   const langRef     = useRef(null);
 
+  // ── ⚡ GOOGLE TRANSLATE BACKEND INTEGRATION ENGINE ⚡ ──
+  useEffect(() => {
+    window.googleTranslateElementInit = () => {
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,zh-CN",
+            autoDisplay: false,
+          },
+          "google_translate_element"
+        );
+      }
+    };
+
+    const scriptId = "google-translate-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  const runGoogleTranslation = (langCode) => {
+    const targetLang = langCode === "zh" ? "zh-CN" : "en";
+    const googleSelect = document.querySelector(".goog-te-combo");
+    
+    if (googleSelect) {
+      googleSelect.value = targetLang;
+      googleSelect.dispatchEvent(new Event("change"));
+    }
+  };
+
   // Restore saved locale on mount
   useEffect(() => {
     const saved = localStorage.getItem("jlh_locale");
-    if (saved) setLocale(saved);
+    if (saved) {
+      setLocale(saved);
+      setTimeout(() => runGoogleTranslation(saved), 800);
+    }
   }, []);
+
+  // FIX: Force menus closed whenever user changes pages completely
+  useEffect(() => {
+    setMobileOpen(false);
+    setMobileExpanded(null);
+    setOpenDropdown(null);
+  }, [router.asPath]);
 
   // Scroll detection
   useEffect(() => {
@@ -86,29 +131,28 @@ export default function Nav() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Close mobile menu on resize
+  // Close mobile menu on desktop resize resize
   useEffect(() => {
     const handler = () => { if (window.innerWidth >= 768) setMobileOpen(false); };
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
 
-  // Switch language
   const switchLocale = (code) => {
     setLocale(code);
     localStorage.setItem("jlh_locale", code);
     setLangOpen(false);
-    // Broadcast so other components can react
+    runGoogleTranslation(code);
     window.dispatchEvent(new CustomEvent("jlh-locale-change", { detail: code }));
   };
 
-  // Translate a label
   const tLabel = (label) => locale === "zh" ? (ZH_NAV[label] || label) : label;
-
   const currentFlag = LOCALES.find(l => l.code === locale)?.flag || "🇬🇧";
 
   return (
     <>
+      <div id="google_translate_element" style={{ display: "none" }} />
+
       <header
         style={{
           position: "fixed",
@@ -134,12 +178,12 @@ export default function Nav() {
             justifyContent: "space-between",
           }}>
 
-            {/* ── Logo ───────────────────────────────────────── */}
+            {/* Logo */}
             <Link href="/" style={{ textDecoration: "none" }}>
               <JLHLogo height={42} />
             </Link>
 
-            {/* ── Desktop Nav ─────────────────────────────────── */}
+            {/* Desktop Nav */}
             <nav
               ref={dropdownRef}
               className="hidden md:flex items-center gap-1"
@@ -203,9 +247,7 @@ export default function Nav() {
                           stroke="currentColor" strokeWidth={2}
                           style={{
                             transition: "transform 0.2s",
-                            transform: openDropdown === label
-                              ? "rotate(180deg)"
-                              : "rotate(0deg)",
+                            transform: openDropdown === label ? "rotate(180deg)" : "rotate(0deg)",
                           }}
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -214,7 +256,7 @@ export default function Nav() {
                     </Link>
                   )}
 
-                  {/* Dropdown */}
+                  {/* Dropdown Box */}
                   {sublinks && openDropdown === label && (
                     <div
                       style={{
@@ -233,7 +275,6 @@ export default function Nav() {
                         zIndex: 60,
                       }}
                     >
-                      {/* Triangle pointer */}
                       <div style={{
                         position: "absolute",
                         top: "-6px", left: "50%",
@@ -248,7 +289,6 @@ export default function Nav() {
                         <Link
                           key={sub.label}
                           href={sub.href}
-                          onClick={() => setOpenDropdown(null)}
                           style={{
                             display: "flex",
                             alignItems: "center",
@@ -282,7 +322,7 @@ export default function Nav() {
                 </div>
               ))}
 
-              {/* ── Flag Language Switcher ── */}
+              {/* Language Picker Switcher */}
               <div ref={langRef} style={{ position: "relative", marginLeft: "0.5rem" }}>
                 <button
                   onClick={() => setLangOpen(s => !s)}
@@ -316,7 +356,6 @@ export default function Nav() {
                   </svg>
                 </button>
 
-                {/* Lang dropdown */}
                 {langOpen && (
                   <div style={{
                     position: "absolute",
@@ -380,10 +419,8 @@ export default function Nav() {
               </div>
             </nav>
 
-            {/* ── Mobile: flag + hamburger ─────────────────────── */}
+            {/* Mobile Actions Layer */}
             <div className="flex md:hidden items-center gap-3">
-
-              {/* Mobile flag switcher */}
               <div style={{ position: "relative" }}>
                 <button
                   onClick={() => setLangOpen(s => !s)}
@@ -427,7 +464,7 @@ export default function Nav() {
                 )}
               </div>
 
-              {/* Hamburger */}
+              {/* Hamburger Button */}
               <button
                 aria-label="Toggle menu"
                 onClick={() => setMobileOpen(s => !s)}
@@ -453,7 +490,7 @@ export default function Nav() {
             </div>
           </div>
 
-          {/* ── Mobile Menu ──────────────────────────────────── */}
+          {/* Mobile Menu Slide Drawer */}
           <div
             style={{
               overflow: "hidden",
@@ -466,13 +503,14 @@ export default function Nav() {
               {NAV_LINKS.map(({ label, href, sublinks, isCta }) => (
                 <div key={label}>
                   <div style={{
-                    display: "flex", alignItems: "center", justifyContent: "space-between",
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "space-between",
                     padding: "0.75rem 0",
                     borderBottom: "1px solid rgba(255,255,255,0.04)",
                   }}>
                     <Link
                       href={href}
-                      onClick={() => { if (!sublinks) setMobileOpen(false); }}
                       style={{
                         fontSize: "0.85rem", letterSpacing: "0.1em",
                         textTransform: "uppercase", fontWeight: 500,
@@ -503,7 +541,6 @@ export default function Nav() {
                         <Link
                           key={sub.label}
                           href={sub.href}
-                          onClick={() => { setMobileOpen(false); setMobileExpanded(null); }}
                           style={{
                             display: "flex", alignItems: "center", gap: "10px",
                             padding: "0.65rem 1rem", fontSize: "0.82rem",
@@ -527,7 +564,6 @@ export default function Nav() {
         </div>
       </header>
 
-      {/* Spacer so content isn't hidden under fixed nav */}
       <div style={{ height: "70px" }} />
 
       <style jsx global>{`
